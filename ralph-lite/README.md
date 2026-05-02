@@ -1,8 +1,7 @@
-# Ralph Lite
+# Ralph Wiggum Lite
 
 A minimal demonstration of the **Ralph Wiggum loop** pattern: a bash loop that repeatedly invokes a Claude Code slash command until a completion signal is emitted.
 
-This is a stripped-down version of the parent `ralph.sh` in the project root. Instead of running a full research workflow, it just increments a counter.
 
 ## What It Does
 
@@ -24,8 +23,6 @@ echo '{"sum": 0}' > research.json
 ./ralph.sh 10
 ```
 
-The script will stop automatically once `sum` reaches 5, or when the max-iteration count is exhausted.
-
 ### Expected Output
 
 ```
@@ -46,57 +43,4 @@ Iteration: sum incremented to 5
 ========================================
 LOOP COMPLETE after 5 iterations (sum reached 5)!
 ========================================
-```
-
-## How the Completion Signal Works
-
-`ralph.sh` greps each iteration's output for the literal string `<promise>COMPLETE</promise>`. When the slash command emits that tag, the loop exits with status `0`. This mirrors the contract used by the main research workflow.
-
-## Customizing
-
-- **Change the target**: edit `.claude/commands/execute-ralph-lite.md` and swap `sum >= 5` for a different threshold.
-- **Change the step**: increment by more than 1, or replace the increment with any other per-iteration work.
-- **Add state**: extend `research.json` with additional fields — the command handler can track whatever it needs.
-
-## Why This Exists
-
-A minimal reference for understanding the Ralph Wiggum loop pattern before diving into the full research workflow in the parent directory. Useful for:
-- Testing that `claude -p` works end-to-end in your environment.
-- Demonstrating the `<promise>COMPLETE</promise>` exit-signal contract.
-- Building your own Ralph-style loops from a known-working template.
-
-## Running It
-
-All commands below assume you are `cd`'d into the `ralph-lite` directory:
-
-```bash
-cd ralph-lite
-```
-
-### Run a Single Iteration (Manual, One Step at a Time)
-
-Use this to bump the counter once and inspect the result — great for debugging the command itself without looping.
-
-```
-/execute-ralph-lite
-```
-
-### Run the Full Loop (Automated Until Completion)
-
-Use this to let the loop drive itself until `sum` reaches 5 (or the max iteration cap is hit):
-
-```bash
-./ralph.sh 10
-```
-
-- The argument (`5`) is the **maximum** number of iterations — a safety cap.
-- The loop exits **early** (exit code `0`) as soon as `<promise>COMPLETE</promise>` is emitted, which happens when `sum` hits 5.
-- If the cap is reached first, the loop exits with code `1`.
-
-### Reset State Between Runs
-
-`research.json` persists across runs. To start fresh:
-
-```bash
-echo '{"sum": 0}' > research.json
 ```
