@@ -207,3 +207,33 @@ The winning question (#103) exploits **modification blindness**: LLMs recognize 
 - **3 rejected winners** at 0% (Questions 16, 34, 38 -- did not meet strawberry criteria)
 - **2 partial successes** at 40% (Questions 55, 104)
 - The researcher agent evolved from basic character-counting tricks to sophisticated cognitive exploits targeting modification blindness
+
+---
+
+## Sources
+
+The claims in this report rest on two bodies of public work: (1) the academic / industry literature defining "self-evolving agents," and (2) the documented Ralph Wiggum pattern as it has crystallized in the Claude Code ecosystem.
+
+### Self-evolving agent definitions and frameworks
+- [Self-Evolving Agents — A Cookbook for Autonomous Agent Retraining (OpenAI Cookbook)](https://cookbook.openai.com/examples/partners/self_evolving_agents/autonomous_agent_retraining) — defines the closed-loop, feedback-driven self-modification pattern this repo implements via the `update_agent` phase.
+- [Self-Evolving Agents: Three Frameworks That Let Your AI Improve Itself (Softmax)](https://softmaxdata.com/blog/evo/) — surveys the design space; this repo's accumulating-knowledge approach maps to the "prompt/agent-definition mutation" branch (no model retraining).
+- [How to Build a Self-Improving AI Agent That Learns From Its Own Mistakes (MindStudio)](https://www.mindstudio.ai/blog/self-improving-ai-agent-feedback-loop) — describes the run -> score -> diagnose -> modify cycle that matches this repo's six-phase state machine.
+- [Self-Evolving AI Agents (Emergent Mind)](https://www.emergentmind.com/topics/self-evolving-ai-agent) — academic-leaning overview of the term as used in the agentic-AI literature.
+- [Recursive Self-Improvement / Self-Play (Inferensys glossary)](https://inferensys.com/glossary/agentic-cognitive-architectures/recursive-self-improvement/self-play) — situates this repo's adversarial self-play (LLMs probing LLMs) within the broader recursive-self-improvement family.
+
+### Agent loop architecture (general background)
+- [What Is the AI Agent Loop? The Core Architecture Behind Autonomous AI Systems (Oracle)](https://blogs.oracle.com/developers/what-is-the-ai-agent-loop-the-core-architecture-behind-autonomous-ai-systems)
+- [The Agent Loop: How AI Thinks, Decides, and Learns From Action (Tredence)](https://www.tredence.com/blog/ai-agent-loop)
+- [Agent Loop Explained: Designing Smarter Agentic AI Solutions (TechAhead)](https://www.techaheadcorp.com/blog/understanding-the-agent-loop/)
+
+### Ralph Wiggum pattern (inner loop engine)
+- [Ralph Wiggum plugin — Anthropic Claude Code (official)](https://github.com/anthropics/claude-code/tree/main/plugins/ralph-wiggum) — Anthropic's reference implementation; validates `ralph.sh` as a textbook instance of the pattern.
+- [Ralph Loop — Claude Plugin (Anthropic)](https://claude.com/plugins/ralph-loop) — official plugin listing.
+- ['Ralph Wiggum' loop prompts Claude to vibe-clone software (The Register, Jan 2026)](https://www.theregister.com/2026/01/27/ralph_wiggum_claude_loops/) — mainstream coverage of the pattern's emergence.
+- [The Ralph Wiggum technique: Run Claude Code autonomously for hours (Cyrus)](https://www.atcyrus.com/stories/ralph-wiggum-technique-claude-code-autonomous-loops) — practitioner write-up describing the self-correcting reinjection mechanic this repo uses.
+- [Ralph Wiggum: Autonomous Loops for Claude Code (paddo.dev)](https://paddo.dev/blog/ralph-wiggum-autonomous-loops/) — origin attribution to Geoffrey Huntley and the "while true" formulation.
+- [Ralph Wiggum Loop: Autonomous Iteration Workflows (AI Agent Factory)](https://agentfactory.panaversity.org/docs/General-Agents-Foundations/general-agents/ralph-wiggum-loop) — pedagogical treatment of the pattern.
+- [Ralph Wiggum — AI Loop Technique for Claude Code (Awesome Claude)](https://awesomeclaude.ai/ralph-wiggum) — community catalog entry.
+
+### Related implementations (sibling systems)
+- [karpathy/autoresearch (GitHub)](https://github.com/karpathy/autoresearch) — the autonomous overnight research-loop pattern applied to LLM training; cross-analyzed in `karpathy-autoresearch-analysis.md` in this directory.
