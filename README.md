@@ -1,4 +1,4 @@
-# Novel LLM-Breaking Questions - Infinite Research Loop
+# Ralph Wiggum Self Evolving Loop - Novel LLM-Breaking Questions
 
 ![Status](https://img.shields.io/badge/Status-RESEARCHING-yellow?style=for-the-badge)
 ![Questions Tested](https://img.shields.io/badge/Questions_Tested-104-blue?style=for-the-badge)
